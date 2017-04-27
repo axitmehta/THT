@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "385987413655",
+    "firebase_url": "https://talk-happy-therapy.firebaseio.com",
+    "project_id": "talk-happy-therapy",
+    "storage_bucket": "talk-happy-therapy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385987413655:android:88b62dcf82d9de03",
+        "android_client_info": {
+          "package_name": "talkhappytherapy.com.tht"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385987413655-op25trjv15nlr36vh8g4krvlgchdu697.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "talkhappytherapy.com.tht",
+            "certificate_hash": "5db72e296087866ee5c5751c6f0ff7ef5563631c"
+          }
+        },
+        {
+          "client_id": "385987413655-86pujge7aqg4uk00oupdgn9aso6gtakm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCQGtiS4cQ_aOgVpzE2lkvXLbfa07DZJw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385987413655-86pujge7aqg4uk00oupdgn9aso6gtakm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

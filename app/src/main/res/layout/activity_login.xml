@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_login"
+                android:background="@color/colorPrimary">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/welcome_back_img"
+                    android:src="@drawable/min1"
+                    android:scaleType="fitStart"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginEnd="35dp"
+                android:orientation="vertical">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/Login_EditTextEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:hint="Email Id"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textSize="18sp"
+                    app:met_baseColor="@android:color/white"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@android:color/white"
+                    app:met_primaryColor="@android:color/white"
+                    app:met_singleLineEllipsis="true"
+
+                    app:met_textColor="@android:color/white"
+                    app:met_textColorHint="@android:color/white"
+                    app:met_underlineColor="@android:color/white" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    app:met_textColor="@android:color/white"
+                    app:met_textColorHint="@android:color/white"
+                    app:met_baseColor="@android:color/white"
+                    app:met_floatingLabel="highlight"
+                    app:met_floatingLabelTextColor="@android:color/white"
+                    app:met_underlineColor="@android:color/white"
+                    app:met_primaryColor="@android:color/white"
+                    app:met_singleLineEllipsis="true"
+                    android:inputType="textPassword"
+                    android:id="@+id/login_EditTextPassword"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/login_loginbtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:background="@color/colorAccent"
+                        android:text="LOG IN"
+                        android:layout_weight="2"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                        <ImageView
+                        android:id="@+id/g_log"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="0.6"
+                        android:scaleY="0.6"
+                        android:src="@drawable/google_icon" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Forgot Password?"
+                        android:layout_gravity="center"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:gravity="start"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:id="@+id/forgot"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Support"
+                        android:layout_gravity="center"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:gravity="end"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:id="@+id/support"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"/>
+
+                <!--<info.hoang8f.widget.FButton-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Create a New Chikoop Account"-->
+                <!--android:background="@color/colorAccent"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textStyle="bold"-->
+                <!--app:buttonColor="@color/colorAccent"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:layout_marginBottom="6dp"-->
+                <!--fbutton:cornerRadius="15dp"-->
+                <!--fbutton:shadowEnabled="true"-->
+                <!--fbutton:shadowHeight="6dp"-->
+                <!--android:drawablePadding="0dp"-->
+                <!--android:minHeight="60dp"-->
+                <!--android:id="@+id/signupButton"/>-->
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Create a New Account"
+                    android:background="@drawable/roundedcorners1"
+                    android:textColor="@android:color/white"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:id="@+id/signupButton"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>
+

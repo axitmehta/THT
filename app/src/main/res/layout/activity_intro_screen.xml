@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout android:id="@+id/coordinatorLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backred">
+
+        <!--<android.support.v4.view.ViewPager-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/info_view_pager"-->
+        <!--android:background="@color/textColor">-->
+
+        <!--</android.support.v4.view.ViewPager>-->
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center_vertical|center_horizontal|center">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/BottomButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <Button
+                android:id="@+id/singup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:layout_weight="50"
+                android:background="@drawable/roundedcorners"
+                android:text="Sign up"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="50"
+                android:background="@drawable/roundedcorners"
+                android:text="Log in"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/anonymous"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView2"
+            android:background="@drawable/roundedcorners"
+            android:text="Continue Anonymously"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/BottomButton"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="OR"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="We, the Talk Happy Therapy Team, are initiating the happiness movement. Our Happiness Ambassadors will reach you out for any talk/counselling/suggestions or any thing to bring a smile and fade away all your anxiety."
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="You can get in touch with us through message or email. We would be more than happy to make you happy. Stay awesome!"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@id/BottomButton"-->
+        <!--android:id="@+id/Dots"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<com.pixelcan.inkpageindicator.InkPageIndicator-->
+        <!--android:id="@+id/page_indicator"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:dotDiameter="8dp"-->
+        <!--app:dotGap="8dp"-->
+        <!--app:animationDuration="200"-->
+        <!--app:pageIndicatorColor="@color/InActiveDotColor"-->
+        <!--app:currentPageIndicatorColor="@color/colorPrimary"/>-->
+
+        <!--</LinearLayout>-->
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
