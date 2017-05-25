@@ -24,11 +24,12 @@
                 android:background="@color/colorPrimary">
 
                 <ImageView
+                    android:id="@+id/welcome_back_img"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
-                    android:id="@+id/welcome_back_img"
-                    android:src="@drawable/min3"
-                    android:scaleType="fitStart"/>
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/min3" />
 
             </RelativeLayout>
 

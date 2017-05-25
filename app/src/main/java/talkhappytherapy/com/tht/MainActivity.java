@@ -39,96 +39,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(null);
             ActionBar supportActionBar = getSupportActionBar();
             supportActionBar.show();*/
-
-
-        mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
-        if (mViewPager != null) {
-            mViewPager.getPagerTitleStrip().setTextColor(Color.WHITE);
-        }
-        if (mViewPager != null) {
-            mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-
-                @Override
-                public Fragment getItem(int position) {
-                    switch (position % 6) {
-                        case 0:
-                            return RecyclerViewFragment.newInstance();
-                        case 1:
-                            //return RecyclerViewFragment1.newInstance();
-                        case 2:
-                            //return RecyclerViewFragment2.newInstance();
-                        case 3:
-                            //return RecyclerViewFragment3.newInstance();
-                        case 4:
-                            //return RecyclerViewFragment4.newInstance();
-                        case 5:
-                            //return RecyclerViewFragment5.newInstance();
-                        default:
-                            return RecyclerViewFragment.newInstance();
-                    }
-                }
-
-                @Override
-                public int getCount() {
-                    return 6;
-                }
-
-                @Override
-                public CharSequence getPageTitle(int position) {
-                    switch (position % 6) {
-                        case 0:
-                            return "TALK TO US";
-                        case 1:
-                            return "UPCOMING EVENTS";
-                        case 2:
-                            return "TALK TO A HAPPINESS COACH";
-                        case 3:
-                            return "HAPPINESS HUB";
-                        case 4:
-                            return "FROM THE FOUNDER";
-                        case 5:
-                            return "CONTACT US";
-                    }
-                    return "";
-                }
-            });
-        }
-
-        mViewPager.setMaterialViewPagerListener(new MaterialViewPager.Listener() {
-            @Override
-            public HeaderDesign getHeaderDesign(int page) {
-                switch (page) {
-                    case 0:
-                        return HeaderDesign.fromColorResAndDrawable( R.color.blue, getResources().getDrawable(R.drawable.min));
-                    case 1:
-                        return HeaderDesign.fromColorResAndDrawable( R.color.red, getResources().getDrawable(R.drawable.min2));
-                    case 2:
-                        return HeaderDesign.fromColorResAndDrawable( R.color.green, getResources().getDrawable(R.drawable.min3));
-                    case 3:
-                        return HeaderDesign.fromColorResAndDrawable( R.color.lime, getResources().getDrawable(R.drawable.tht1));
-                    case 4:
-                        //return HeaderDesign.fromColorResAndDrawable( R.color.green_teal, getResources().getDrawable(R.drawable.dbt));
-                    case 5:
-                        //return HeaderDesign.fromColorResAndDrawable( R.color.cyan, getResources().getDrawable(R.drawable.sundar));
-                }
-
-                return null;
-            }
-        });
-
-        mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
-        mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
-
-        View logo = findViewById(R.id.logo_white);
-        if (logo != null) {
-            logo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mViewPager.notifyHeaderChanged();
-                    //Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
     }
 
     @Override
@@ -153,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
+
+//TODO
 //        // [START config_signin]
 //        // Configure Google Sign In
 //        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
