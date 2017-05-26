@@ -53,6 +53,21 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
     public void onBindViewHolder(final MyViewHolder holder, int position)
     {
         val = listData.get(position).getVal();
+        if(val.contains("http"))
+        {
+            holder.back_img.setVisibility(View.VISIBLE);
+            holder.title.setVisibility(View.GONE);
+            Glide.with(activity)
+                    .load(listData.get(position).getVal())
+                    .into(holder.back_img);
+        }
+        else
+        {
+            holder.back_img.setVisibility(View.GONE);
+            holder.title.setVisibility(View.VISIBLE);
+            holder.title.setText(listData.get(position).getVal());
+        }
+
         holder.card.setOnClickListener(new View.OnClickListener(){
 
 
@@ -83,9 +98,6 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
         {
             super(view);
             title = (TextView) view.findViewById(R.id.textView);
-            description = (TextView) view.findViewById(R.id.textView1);
-            venue = (TextView) view.findViewById(R.id.textView2);
-            datetime = (TextView) view.findViewById(R.id.textView3);
             back_img = (ImageView)view.findViewById(R.id.imageView);
             card = (CardView) view.findViewById(R.id.card);
         }

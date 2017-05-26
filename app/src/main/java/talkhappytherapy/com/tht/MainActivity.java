@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     private List<FeedModel> listData = new ArrayList<>();
     private ProgressWheel progressWheel;
     private PullToRefreshView mPullToRefreshView;
+    private FragmentTransaction ft;
 
 
     @Override
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initUI() {
+
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
         viewPager.setAdapter(new PagerAdapter() {
             @Override
@@ -104,8 +106,7 @@ public class MainActivity extends AppCompatActivity
                 if(position==0)
                 {
 
-                    // Begin the transaction
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.rel, new EventsFragment());
                     ft.commit();
 
@@ -115,14 +116,12 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(position==3)
                 {
-
-                    // Begin the transaction
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.rel, new MomentsFragment());
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.rel1, new MomentsFragment());
                     ft.commit();
 
                     view = LayoutInflater.from(
-                            getBaseContext()).inflate(R.layout.dummy, null, false);
+                            getBaseContext()).inflate(R.layout.dummy1, null, false);
 
                 }
                 else

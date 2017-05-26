@@ -15,7 +15,8 @@
     <RelativeLayout
         android:id="@+id/userclick"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black_overlay">
 
         <ImageView
             android:id="@+id/imageView"
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
+            android:visibility="gone"
             android:src="@drawable/border"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
