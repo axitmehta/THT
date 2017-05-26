@@ -22,9 +22,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import talkhappytherapy.com.tht.Adapter.GetFeedAdapter;
+import talkhappytherapy.com.tht.Adapter.GetMomentAdapter;
 import talkhappytherapy.com.tht.Api.FeedApi;
 import talkhappytherapy.com.tht.Constants.AppConstants;
 import talkhappytherapy.com.tht.Model.FeedModel;
+import talkhappytherapy.com.tht.Model.MomentModel;
 import talkhappytherapy.com.tht.R;
 
 /**
@@ -35,8 +37,8 @@ public class MomentsFragment extends Fragment {
 
 
     private RecyclerView recyclerView;
-    private GetFeedAdapter mAdapter;
-    private List<FeedModel> listData = new ArrayList<>();
+    private GetMomentAdapter mAdapter;
+    private List<MomentModel> listData = new ArrayList<>();
     private ProgressWheel progressWheel;
     private PullToRefreshView mPullToRefreshView;
 
@@ -54,7 +56,7 @@ public class MomentsFragment extends Fragment {
         progressWheel.setVisibility(View.VISIBLE);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         listData = new ArrayList<>();
-        mAdapter = new GetFeedAdapter(listData, getActivity());
+        mAdapter = new GetMomentAdapter(listData, getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
@@ -101,7 +103,7 @@ public class MomentsFragment extends Fragment {
                 FeedApi.FeedModelResponse FeedModelResponse = response.body();
 
                 progressWheel.setVisibility(View.GONE);
-                listData.addAll(FeedModelResponse.getFeedModelList());
+                listData.addAll(FeedModelResponse.getFeedModelList1());
                 mAdapter.notifyDataSetChanged();
 
             }

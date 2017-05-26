@@ -9,7 +9,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import talkhappytherapy.com.tht.Model.FeedModel;
-import talkhappytherapy.com.tht.Model.StatusModel;
+import talkhappytherapy.com.tht.Model.MomentModel;
 
 
 public interface FeedApi {
@@ -30,6 +30,18 @@ public interface FeedApi {
 
         public void setFeedModelList(List<FeedModel> FeedModelList) {
             this.FeedModelList = FeedModelList;
+        }
+
+        @SerializedName("moments")
+        @Expose
+        public List<MomentModel> FeedModelList1 = new ArrayList<>();
+
+        public List<MomentModel> getFeedModelList1() {
+            return FeedModelList1;
+        }
+
+        public void setFeedModelList1(List<MomentModel> FeedModelList1) {
+            this.FeedModelList1 = FeedModelList1;
         }
     }
 }

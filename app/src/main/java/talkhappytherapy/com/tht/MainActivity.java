@@ -50,6 +50,7 @@ import talkhappytherapy.com.tht.Adapter.GetFeedAdapter;
 import talkhappytherapy.com.tht.Api.FeedApi;
 import talkhappytherapy.com.tht.Constants.AppConstants;
 import talkhappytherapy.com.tht.Fragment.EventsFragment;
+import talkhappytherapy.com.tht.Fragment.MomentsFragment;
 import talkhappytherapy.com.tht.Model.FeedModel;
 
 public class MainActivity extends AppCompatActivity
@@ -106,6 +107,18 @@ public class MainActivity extends AppCompatActivity
                     // Begin the transaction
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.rel, new EventsFragment());
+                    ft.commit();
+
+                    view = LayoutInflater.from(
+                            getBaseContext()).inflate(R.layout.dummy, null, false);
+
+                }
+                else if(position==3)
+                {
+
+                    // Begin the transaction
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.rel, new MomentsFragment());
                     ft.commit();
 
                     view = LayoutInflater.from(
