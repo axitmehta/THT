@@ -2,6 +2,7 @@ package talkhappytherapy.com.tht.Adapter;
 
         import android.app.Activity;
         import android.graphics.Color;
+        import android.text.util.Linkify;
         import android.view.View;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
@@ -73,6 +74,7 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         {
             chat_rel.setLayoutParams(ll);
         }
-        ((TextView) view.findViewById(R.id.message)).setText(chat.getMessage());
+        txt = ((TextView) view.findViewById(R.id.message)); txt.setText(chat.getMessage());
+        Linkify.addLinks(txt, Linkify.ALL);
     }
 }

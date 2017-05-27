@@ -30,6 +30,7 @@ import com.yalantis.phoenix.PullToRefreshView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -120,7 +121,10 @@ public class CoachFragment extends Fragment {
             @Override
             public void onChanged() {
                 super.onChanged();
-                listView.setSelection(mChatListAdapter.getCount() - 1);
+                try{
+                    listView.setSelection(mChatListAdapter.getCount() - 1);
+                }catch (Exception e){}
+
             }
         });
 
