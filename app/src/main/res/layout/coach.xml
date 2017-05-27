@@ -5,17 +5,20 @@
     tools:context=".MainActivity"
     android:id="@+id/rel2"
     android:layout_marginTop="65dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginBottom="10dp">
+    android:background="@drawable/back"
+    android:adjustViewBounds="true">
 
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/listFooter"
+        android:transcriptMode="alwaysScroll"
         android:layout_alignParentTop="true"
-        android:transcriptMode="alwaysScroll" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:id="@+id/listFooter"
@@ -24,15 +27,15 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/messageInput"
+        <com.cooltechworks.views.WhatsAppEditText
+            android:id="@+id/whatsapp_edit_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="Type here"
             android:layout_weight="1"
-            android:inputType="textShortMessage"
-            android:lines="1"
-            android:singleLine="true"
-            android:textColor="@android:color/white" />
+            android:minHeight="48dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/sendButton"

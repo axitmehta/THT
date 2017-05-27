@@ -3,6 +3,7 @@ package talkhappytherapy.com.tht.Adapter;
         import android.app.Activity;
         import android.graphics.Color;
         import android.view.View;
+        import android.widget.RelativeLayout;
         import android.widget.TextView;
 
         import com.firebase.client.Query;
@@ -17,6 +18,8 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
 
     // The mUsername for this client. We use this to indicate which messages originated from this user
     private String mUsername;
+    private TextView txt;
+    private RelativeLayout chat_rel;
 
     public ChatListAdapter(Query ref, Activity activity, int layout, String mUsername) {
         super(ref, Chat.class, layout, activity);
@@ -39,9 +42,36 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         authorText.setText(author + ": ");
         // If the message was sent by this user, color it differently
         if (author != null && author.equals(mUsername)) {
+            authorText.setTextColor(Color.WHITE);
+        }
+        else if (author != null && author.equalsIgnoreCase("admin")) {
             authorText.setTextColor(Color.RED);
-        } else {
-            authorText.setTextColor(Color.BLUE);
+        }
+        else {
+            authorText.setTextColor(Color.GREEN);
+        }
+
+        chat_rel = (RelativeLayout) view.findViewById(R.id.chat_rel);
+
+        RelativeLayout.LayoutParams ll = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        ll.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
+        // Defining the layout parameters of the TextView
+        RelativeLayout.LayoutParams lr = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lr.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+
+        if(author != null && author.equals(mUsername))
+        {
+            chat_rel.setLayoutParams(lr);
+        }
+        else
+        {
+            chat_rel.setLayoutParams(ll);
         }
         ((TextView) view.findViewById(R.id.message)).setText(chat.getMessage());
     }
