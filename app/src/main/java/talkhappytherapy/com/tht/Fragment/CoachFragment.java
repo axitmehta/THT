@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cooltechworks.views.WhatsAppEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -52,7 +51,7 @@ public class CoachFragment extends Fragment {
     private Firebase mFirebaseRef;
     private ValueEventListener mConnectedListener;
     private ChatListAdapter mChatListAdapter;
-    private WhatsAppEditText inputText;
+    private EditText inputText;
     private FirebaseUser user;
 
     @Override
@@ -75,7 +74,8 @@ public class CoachFragment extends Fragment {
         mFirebaseRef = new Firebase(FIREBASE_URL).child("chat");
 
         // Setup our input methods. Enter key on the keyboard or pushing the send button
-        inputText = (WhatsAppEditText) view.findViewById(R.id.whatsapp_edit_view);
+        inputText = (EditText) view.findViewById(R.id.edit_text);
+        inputText.hasFocus();
 
         view.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -71,7 +71,8 @@ dependencies {
     compile 'com.yalantis:phoenix:1.2.3'
     compile 'devlight.io:navigationtabbar:1.2.5'
     compile 'com.firebase:firebase-client-android:2.0.3+'
-    compile 'com.github.cooltechworks:WhatsappFormatter:v1.0'
+    compile 'com.github.florent37:materialtextfield:1.0.7'
+    compile 'me.himanshusoni.chatmessageview:chat-message-view:1.0.7'
 }
 
 

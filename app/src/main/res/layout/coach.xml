@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:id="@+id/rel2"
     android:layout_marginTop="65dp"
-    android:background="@drawable/back"
     android:adjustViewBounds="true">
 
     <ListView
@@ -16,32 +16,42 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_above="@+id/listFooter"/>
 
     <LinearLayout
         android:id="@+id/listFooter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <com.cooltechworks.views.WhatsAppEditText
-            android:id="@+id/whatsapp_edit_view"
-            android:layout_width="wrap_content"
+        <com.github.florent37.materialtextfield.MaterialTextField
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Type here"
-            android:layout_weight="1"
-            android:minHeight="48dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            app:mtf_image="@android:drawable/btn_star">
 
-        <ImageButton
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Type Here"
+                android:textColor="#333"
+                android:textColorHint="#666"
+                android:textSize="15sp"
+                android:id="@+id/edit_text"/>
+
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
+        <ImageView
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_send" />
+            android:layout_height="67dp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal|center|center_vertical"
+            android:src="@drawable/send_icon" />
     </LinearLayout>
 
 
