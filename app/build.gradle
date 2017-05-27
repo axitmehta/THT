@@ -5,11 +5,23 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "talkhappytherapy.com.tht"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        dexOptions {
+            javaMaxHeapSize "4g"
+        }
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/LICENSE-FIREBASE.txt'
+            exclude 'META-INF/LICENSE-FIREBASE_jvm.txt'
+        }
     }
     buildTypes {
         release {
@@ -58,6 +70,7 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.yalantis:phoenix:1.2.3'
     compile 'devlight.io:navigationtabbar:1.2.5'
+    compile 'com.firebase:firebase-client-android:2.0.3+'
 }
 
 

@@ -49,6 +49,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import talkhappytherapy.com.tht.Adapter.GetFeedAdapter;
 import talkhappytherapy.com.tht.Api.FeedApi;
 import talkhappytherapy.com.tht.Constants.AppConstants;
+import talkhappytherapy.com.tht.Fragment.CoachFragment;
 import talkhappytherapy.com.tht.Fragment.EventsFragment;
 import talkhappytherapy.com.tht.Fragment.MomentsFragment;
 import talkhappytherapy.com.tht.Model.FeedModel;
@@ -112,6 +113,17 @@ public class MainActivity extends AppCompatActivity
 
                     view = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.dummy, null, false);
+
+                }
+                else if(position==1)
+                {
+
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.rel2, new CoachFragment());
+                    ft.commit();
+
+                    view = LayoutInflater.from(
+                            getBaseContext()).inflate(R.layout.dummy2, null, false);
 
                 }
                 else if(position==3)

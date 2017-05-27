@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ import talkhappytherapy.com.tht.Model.MomentModel;
 import talkhappytherapy.com.tht.R;
 
 
-public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyViewHolder>  {
+public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyViewHolder>{
 
     private List<MomentModel> listData;
     private Activity activity;
@@ -68,6 +67,7 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
             holder.title.setText(listData.get(position).getVal());
         }
 
+
         holder.card.setOnClickListener(new View.OnClickListener(){
 
 
@@ -88,8 +88,8 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+
         public TextView title, description, venue, datetime;
         public ImageView back_img;
         public CardView card;
