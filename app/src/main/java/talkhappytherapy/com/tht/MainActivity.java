@@ -2,6 +2,7 @@ package talkhappytherapy.com.tht;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -83,6 +84,23 @@ public class MainActivity extends AppCompatActivity
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
+
+        // If a notification message is tapped, any data accompanying the notification
+        // message is available in the intent extras. In this project the launcher
+        // intent is fired when the notification is tapped, so any accompanying data would
+        // be handled here. If you want a different intent fired, set the click_action
+        // field of the notification message to the desired intent. The launcher intent
+        // is used when no click_action is specified.
+        //
+        // Handle possible data accompanying notification message.
+        if (getIntent().getExtras() != null) {
+            if (getIntent().getStringExtra("LINK")!=null) {
+                System.out.println(getIntent().getStringExtra("LINK"));
+                String url = getIntent().getStringExtra("LINK");
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }}
 
         init();
         initUI();
