@@ -44,7 +44,7 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         if (author != null && author.equals(mUsername)) {
             authorText.setTextColor(Color.YELLOW);
         }
-        else if (author != null && author.equalsIgnoreCase("admin")) {
+        else if (author != null && (author.equalsIgnoreCase("admin"))||(author.equalsIgnoreCase("talk happy therapy"))){
             authorText.setTextColor(Color.RED);
         }
         else {

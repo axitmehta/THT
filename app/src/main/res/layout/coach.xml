@@ -3,10 +3,23 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:id="@+id/rel2"
     android:layout_marginTop="65dp"
     android:adjustViewBounds="true">
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        wheel:matProg_barColor="#5588FF"
+        android:layout_margin="25dp"
+        wheel:matProg_progressIndeterminate="true"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ListView
         android:id="@+id/list"
@@ -16,7 +29,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/listFooter"/>
+        android:layout_above="@+id/listFooter"
+        android:layout_margin="5dp"/>
 
     <LinearLayout
         android:id="@+id/listFooter"
@@ -25,12 +39,14 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp">
 
         <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            app:mtf_image="@android:drawable/btn_star">
+            app:mtf_image="@android:drawable/btn_star"
+            android:id="@+id/matedit">
 
             <EditText
                 android:layout_width="match_parent"

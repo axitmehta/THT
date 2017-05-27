@@ -73,6 +73,8 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.0.3+'
     compile 'com.github.florent37:materialtextfield:1.0.7'
     compile 'me.himanshusoni.chatmessageview:chat-message-view:1.0.7'
+    compile 'com.github.lzyzsd.randomcolor:library:1.0.0'
+
 }
 
 

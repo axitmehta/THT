@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -51,6 +52,7 @@ import talkhappytherapy.com.tht.Api.FeedApi;
 import talkhappytherapy.com.tht.Constants.AppConstants;
 import talkhappytherapy.com.tht.Fragment.CoachFragment;
 import talkhappytherapy.com.tht.Fragment.EventsFragment;
+import talkhappytherapy.com.tht.Fragment.FounderFragment;
 import talkhappytherapy.com.tht.Fragment.MomentsFragment;
 import talkhappytherapy.com.tht.Model.FeedModel;
 
@@ -77,6 +79,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
 
         init();
         initUI();
@@ -124,6 +130,17 @@ public class MainActivity extends AppCompatActivity
 
                     view = LayoutInflater.from(
                             getBaseContext()).inflate(R.layout.dummy2, null, false);
+
+                }
+                else if(position==2)
+                {
+
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.rel3, new FounderFragment());
+                    ft.commit();
+
+                    view = LayoutInflater.from(
+                            getBaseContext()).inflate(R.layout.dummy3, null, false);
 
                 }
                 else if(position==3)
@@ -198,7 +215,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageSelected(final int position) {
-                navigationTabBar.getModels().get(position).hideBadge();
+                //navigationTabBar.getModels().get(position).hideBadge();
             }
 
             @Override
@@ -226,7 +243,7 @@ public class MainActivity extends AppCompatActivity
     void init()
     {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
+        toolbar.setTitle("Talk Happy Therapy");
         setSupportActionBar(toolbar);
 
         // [START config_signin]
@@ -352,7 +369,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_become_volunteer) {
 
         } else if (id == R.id.nav_sponser) {

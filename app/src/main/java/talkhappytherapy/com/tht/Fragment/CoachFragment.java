@@ -1,5 +1,6 @@
 package talkhappytherapy.com.tht.Fragment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -13,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.florent37.materialtextfield.MaterialTextField;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -37,6 +40,8 @@ import talkhappytherapy.com.tht.Adapter.ChatListAdapter;
 import talkhappytherapy.com.tht.Model.Chat;
 import talkhappytherapy.com.tht.R;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 /**
  * Created by Alienware on 26-05-2017.
  */
@@ -53,6 +58,8 @@ public class CoachFragment extends Fragment {
     private ChatListAdapter mChatListAdapter;
     private EditText inputText;
     private FirebaseUser user;
+    private ProgressWheel progresswheel;
+    private MaterialTextField mat;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +82,10 @@ public class CoachFragment extends Fragment {
 
         // Setup our input methods. Enter key on the keyboard or pushing the send button
         inputText = (EditText) view.findViewById(R.id.edit_text);
-        inputText.hasFocus();
+        mat = (MaterialTextField) view.findViewById(R.id.matedit);
+        mat.expand();
+
+        progresswheel = (ProgressWheel)view.findViewById(R.id.progress_wheel);
 
         view.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +110,12 @@ public class CoachFragment extends Fragment {
         //final ListView listView = getListView();
         // Tell our list adapter that we only want 50 messages at a time
         mChatListAdapter = new ChatListAdapter(mFirebaseRef.limit(50), getActivity(), R.layout.chat_message, mUsername);
-        listView.setAdapter(mChatListAdapter);
+        try {
+            listView.setAdapter(mChatListAdapter);
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
         mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
@@ -115,9 +130,11 @@ public class CoachFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean connected = (Boolean) dataSnapshot.getValue();
                 if (connected) {
-                    Toast.makeText(getContext(), "Connected to Chat", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Connected to Chat", Toast.LENGTH_SHORT).show();
+                    progresswheel.setVisibility(View.GONE);
                 } else {
-                    Toast.makeText(getContext(), "Disconnected from Chat", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Disconnected from Chat", Toast.LENGTH_SHORT).show();
+                    progresswheel.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -144,7 +161,7 @@ public class CoachFragment extends Fragment {
                 if (mUsername == null) {
                     Random r = new Random();
                     // Assign a random user name if we don't have one saved.
-                    mUsername = "THT(Anonymity)" + r.nextInt(100000);
+                    mUsername = "THT(Anonymous)" + r.nextInt(100000);
                     prefs.edit().putString("username", mUsername).apply();
                 }
             }

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.lzyzsd.randomcolor.RandomColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,8 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position)
     {
+        RandomColor randomColor = new RandomColor();
+
         val = listData.get(position).getVal();
         if(val.contains("http"))
         {
@@ -62,6 +65,9 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
         }
         else
         {
+
+            int color = randomColor.randomColor();
+            holder.userclick.setBackgroundColor(color);
             holder.back_img.setVisibility(View.GONE);
             holder.title.setVisibility(View.VISIBLE);
             holder.title.setText(listData.get(position).getVal());
@@ -93,6 +99,7 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
         public TextView title, description, venue, datetime;
         public ImageView back_img;
         public CardView card;
+        public RelativeLayout userclick;
 
         public MyViewHolder(View view)
         {
@@ -100,6 +107,7 @@ public class GetMomentAdapter extends RecyclerView.Adapter<GetMomentAdapter.MyVi
             title = (TextView) view.findViewById(R.id.textView);
             back_img = (ImageView)view.findViewById(R.id.imageView);
             card = (CardView) view.findViewById(R.id.card);
+            userclick = (RelativeLayout) view.findViewById(R.id.userclick);
         }
     }
 }
