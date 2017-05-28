@@ -1,21 +1,16 @@
 package talkhappytherapy.com.tht;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -87,13 +82,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void StartAnimations() {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
+//        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
 //        anim.reset();
 //        LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
 //        l.clearAnimation();
 //        l.startAnimation(anim);
 
-        anim = AnimationUtils.loadAnimation(this, R.anim.translate);
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
         ImageView iv = (ImageView) findViewById(R.id.logo);
         iv.clearAnimation();

@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (emailid.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
+                if (emailid.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fields cannot be Empty", Toast.LENGTH_LONG).show();
                 } else {
                     login_func(emailid.getText().toString(), password.getText().toString());
@@ -148,20 +148,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         dialog.dismiss();
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        if (user.isEmailVerified()) {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Email not verifed. Please verify you email and then login.", Toast.LENGTH_LONG).show();
+                        if (user != null) {
+                            if (user.isEmailVerified()) {
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Email not verifed. Please verify you email and then login.", Toast.LENGTH_LONG).show();
+                            }
                         }
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("TAG", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication Failed",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -222,15 +224,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d("TAG", "Email sent.");
-                            Toast.makeText(LoginActivity.this, "Check you Email...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Check you Email... Reset your password with the link provided in there.", Toast.LENGTH_LONG).show();
                         } else
-                            Toast.makeText(LoginActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
                     }
                 });
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
+    public static boolean isValidEmail(CharSequence target) {
         if (target == null) {
             return false;
         } else {
@@ -302,8 +304,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
 
                         // [START_EXCLUDE]

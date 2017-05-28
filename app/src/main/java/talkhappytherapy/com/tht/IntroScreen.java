@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,17 +16,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class IntroScreen extends AppCompatActivity{
 
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    private Button SignUP_Button, Login_Button;
-    private Button Anonymous_Button;
     private FirebaseAuth mAuth;
     private ProgressDialog dialog;
 
@@ -44,22 +37,23 @@ public class IntroScreen extends AppCompatActivity{
 
             String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS, Manifest.permission.GET_ACCOUNTS, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.RECORD_AUDIO};
             if(!hasPermissions(this, PERMISSIONS)){
+                int REQUEST_CODE_ASK_PERMISSIONS = 123;
                 ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_CODE_ASK_PERMISSIONS);
             }
         }
 
-        Anonymous_Button = (Button) findViewById(R.id.anonymous);
-        SignUP_Button = (Button)findViewById(R.id.singup);
-        Login_Button = (Button)findViewById(R.id.login);
+        Button anonymous_Button = (Button) findViewById(R.id.anonymous);
+        Button signUP_Button = (Button) findViewById(R.id.singup);
+        Button login_Button = (Button) findViewById(R.id.login);
 
-        Anonymous_Button.setOnClickListener(new View.OnClickListener() {
+        anonymous_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInAnonymously();
             }
         });
 
-        SignUP_Button.setOnClickListener(new View.OnClickListener() {
+        signUP_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intd= new Intent(IntroScreen.this, SignupActivity.class);
@@ -69,7 +63,7 @@ public class IntroScreen extends AppCompatActivity{
             }
         });
 
-        Login_Button.setOnClickListener(new View.OnClickListener() {
+        login_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intd= new Intent(IntroScreen.this,LoginActivity.class);
@@ -96,8 +90,8 @@ public class IntroScreen extends AppCompatActivity{
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInAnonymously:failure", task.getException());
-                            Toast.makeText(IntroScreen.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(IntroScreen.this, task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
 
                         // [START_EXCLUDE]

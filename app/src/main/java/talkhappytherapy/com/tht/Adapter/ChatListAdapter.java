@@ -1,13 +1,22 @@
 package talkhappytherapy.com.tht.Adapter;
 
         import android.app.Activity;
+        import android.graphics.Bitmap;
+        import android.graphics.BitmapFactory;
         import android.graphics.Color;
         import android.text.util.Linkify;
         import android.view.View;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
 
+        import com.bumptech.glide.Glide;
         import com.firebase.client.Query;
+
+        import java.io.InputStream;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
 
         import talkhappytherapy.com.tht.Model.Chat;
         import talkhappytherapy.com.tht.R;
@@ -17,14 +26,19 @@ package talkhappytherapy.com.tht.Adapter;
  */
 public class ChatListAdapter extends FirebaseListAdapter<Chat> {
 
+    private final Activity activity;
     // The mUsername for this client. We use this to indicate which messages originated from this user
     private String mUsername;
     private TextView txt;
     private RelativeLayout chat_rel;
+    private Bitmap bitmap;
+    private ImageView image_link;
+    private LinearLayout messagelay;
 
     public ChatListAdapter(Query ref, Activity activity, int layout, String mUsername) {
         super(ref, Chat.class, layout, activity);
         this.mUsername = mUsername;
+        this.activity = activity;
     }
 
     /**
@@ -45,11 +59,15 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         if (author != null && author.equals(mUsername)) {
             authorText.setTextColor(Color.YELLOW);
         }
-        else if (author != null && (author.equalsIgnoreCase("admin"))||(author.equalsIgnoreCase("talk happy therapy"))){
-            authorText.setTextColor(Color.RED);
-        }
         else {
-            authorText.setTextColor(Color.GREEN);
+            if (author != null) {
+                if (author.equalsIgnoreCase("admin") || author.equalsIgnoreCase("talk happy therapy")){
+                    authorText.setTextColor(Color.RED);
+                }
+                else {
+                    authorText.setTextColor(Color.GREEN);
+                }
+            }
         }
 
         chat_rel = (RelativeLayout) view.findViewById(R.id.chat_rel);
@@ -66,15 +84,35 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         lr.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
 
-        if(author != null && author.equals(mUsername))
-        {
-            chat_rel.setLayoutParams(lr);
+        if (author != null) {
+            if(author.equals(mUsername))
+            {
+                chat_rel.setLayoutParams(lr);
+            }
+            else
+            {
+                chat_rel.setLayoutParams(ll);
+            }
         }
-        else
+
+        txt = ((TextView) view.findViewById(R.id.message));
+        image_link = (ImageView)view.findViewById(R.id.imagelink);
+        messagelay = (LinearLayout)view.findViewById(R.id.messagelay);
+        if(chat.getMessage().contains(".jpg")||chat.getMessage().contains(".png")||chat.getMessage().contains(".jpeg")||chat.getMessage().contains(".gif"))
         {
-            chat_rel.setLayoutParams(ll);
+            image_link.setVisibility(View.VISIBLE);
+            txt.setVisibility(View.GONE);
+            Glide.with(activity)
+                    .load(chat.getMessage())
+                    .into(image_link);
+
         }
-        txt = ((TextView) view.findViewById(R.id.message)); txt.setText(chat.getMessage());
-        Linkify.addLinks(txt, Linkify.ALL);
+        else {
+
+            txt.setVisibility(View.VISIBLE);
+            image_link.setVisibility(View.GONE);
+            txt.setText(chat.getMessage());
+            Linkify.addLinks(txt, Linkify.ALL);
+        }
     }
 }

@@ -91,14 +91,7 @@ public class CoachFragment extends Fragment {
         view.findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String input = inputText.getText().toString();
-                if (!input.equals("")) {
-                    // Create our 'model', a Chat object
-                    Chat chat = new Chat(input, mUsername);
-                    // Create a new, auto-generated child of that chat location, and save our chat data there
-                    mFirebaseRef.push().setValue(chat);
-                    inputText.setText("");
-                }
+                sendMessage();
             }
         });
     }
@@ -113,9 +106,8 @@ public class CoachFragment extends Fragment {
         mChatListAdapter = new ChatListAdapter(mFirebaseRef.limit(50), getActivity(), R.layout.chat_message, mUsername);
         try {
             listView.setAdapter(mChatListAdapter);
-        }catch (Exception e)
+        }catch (Exception ignored)
         {
-            System.out.println(e);
         }
         mChatListAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
@@ -123,7 +115,7 @@ public class CoachFragment extends Fragment {
                 super.onChanged();
                 try{
                     listView.setSelection(mChatListAdapter.getCount() - 1);
-                }catch (Exception e){}
+                }catch (Exception ignored){}
 
             }
         });
@@ -144,7 +136,6 @@ public class CoachFragment extends Fragment {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-                // No-op
             }
         });
     }

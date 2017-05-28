@@ -74,7 +74,7 @@ dependencies {
     compile 'com.github.florent37:materialtextfield:1.0.7'
     compile 'me.himanshusoni.chatmessageview:chat-message-view:1.0.7'
     compile 'com.github.lzyzsd.randomcolor:library:1.0.0'
-
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'
 }
 
 

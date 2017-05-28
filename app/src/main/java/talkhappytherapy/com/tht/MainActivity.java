@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,6 +23,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
@@ -43,14 +42,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import devlight.io.library.ntb.NavigationTabBar;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import talkhappytherapy.com.tht.Adapter.GetFeedAdapter;
-import talkhappytherapy.com.tht.Api.FeedApi;
-import talkhappytherapy.com.tht.Constants.AppConstants;
 import talkhappytherapy.com.tht.Fragment.CoachFragment;
 import talkhappytherapy.com.tht.Fragment.EventsFragment;
 import talkhappytherapy.com.tht.Fragment.FounderFragment;
@@ -63,17 +55,10 @@ public class MainActivity extends AppCompatActivity
 
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
-    private String name;
-    private String email;
     private String photo;
     CircleImageView nav_userpic;
-    private TextView nav_user, nav_email, nav_user_logout;
-    private RecyclerView recyclerView;
-    private GetFeedAdapter mAdapter;
-    private List<FeedModel> listData = new ArrayList<>();
-    private ProgressWheel progressWheel;
-    private PullToRefreshView mPullToRefreshView;
     private FragmentTransaction ft;
+    private boolean doubleBackToExitPressedOnce;
 
 
     @Override
@@ -282,11 +267,11 @@ public class MainActivity extends AppCompatActivity
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
-            name = user.getDisplayName();
-            email = user.getEmail();
+            String name = user.getDisplayName();
+            String email = user.getEmail();
             try {
                 photo = user.getPhotoUrl().toString();
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
             // The user's ID, unique to the Firebase project. Do NOT use this value to
@@ -302,8 +287,8 @@ public class MainActivity extends AppCompatActivity
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             View hView = navigationView.getHeaderView(0);
-            nav_user = (TextView) hView.findViewById(R.id.name_of_user);
-            nav_email = (TextView) hView.findViewById(R.id.email_of_user);
+            TextView nav_user = (TextView) hView.findViewById(R.id.name_of_user);
+            TextView nav_email = (TextView) hView.findViewById(R.id.email_of_user);
             nav_userpic = (CircleImageView) hView.findViewById(R.id.profile_image);
             try {
                 if (user.isAnonymous()) {
@@ -317,10 +302,10 @@ public class MainActivity extends AppCompatActivity
                         Glide.with(this).load(photo).into(nav_userpic);
 
                 }
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
-            nav_user_logout = (TextView) hView.findViewById(R.id.logout);
+            TextView nav_user_logout = (TextView) hView.findViewById(R.id.logout);
             nav_user_logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -354,7 +339,25 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (doubleBackToExitPressedOnce) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                this.doubleBackToExitPressedOnce = true;
+                Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+            }
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
         }
     }
 
@@ -382,7 +385,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 

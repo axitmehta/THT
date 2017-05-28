@@ -3,6 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:custom="http://schemas.android.com/tools"
     android:id="@+id/chat_rel">
 
     <me.himanshusoni.chatmessageview.ChatMessageView
@@ -14,12 +15,20 @@
         app:cmv_showArrow="true"
         app:cmv_arrowPosition="top"
         app:cmv_arrowGravity="start">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:id="@+id/imagelink"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/messagelay"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
-
+        android:id="@+id/messagelay">
 
     <TextView
         android:id="@+id/author"

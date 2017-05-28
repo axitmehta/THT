@@ -2,26 +2,18 @@ package talkhappytherapy.com.tht;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +23,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SignupActivity extends AppCompatActivity{
@@ -48,12 +37,6 @@ public class SignupActivity extends AppCompatActivity{
 
     Button loginButton;
     private ProgressDialog dialog;
-    private TextView basic_problem, login_problem, payement_problem, other_problem, problem_not_resolved;
-    private int temp = 0;
-    private EditText name, email_support,mobile_support,message;
-    private Spinner chooser;
-    private int flag = 0;
-    private String mailer = "talkhappytherapy@gmail.com";
 
     private FirebaseAuth mAuth;
 
@@ -95,8 +78,8 @@ public class SignupActivity extends AppCompatActivity{
                 else if (password.getText().toString().isEmpty()){
                     Toast.makeText(SignupActivity.this, "All fields are compulsory", Toast.LENGTH_LONG).show();
                 }
-                else if(password.getText().length()<8) {
-                    Toast.makeText(SignupActivity.this, "Password must be atleast 8 characters long", Toast.LENGTH_LONG).show();
+                else if(password.getText().length()<6) {
+                    Toast.makeText(SignupActivity.this, "Password must be atleast 6 characters long", Toast.LENGTH_LONG).show();
                 }
                 else if(!confirmPassword.getText().toString().equals(password.getText().toString())) {
                     Toast.makeText(SignupActivity.this, "Password Field And Confirm Password Field should be same.", Toast.LENGTH_LONG).show();
@@ -144,65 +127,87 @@ public class SignupActivity extends AppCompatActivity{
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("TAG", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        if (task.isSuccessful()) {
+                            Log.d("TAG", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(name)
-                                .build();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name)
+                                    .build();
 
-                        user.updateProfile(profileUpdates)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d("TAG", "User profile updated.");
-                                        }
-                                    }
-                                });
+                            if (user != null) {
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d("TAG", "User profile updated.");
+                                                }
+                                            }
+                                        });
+                            }
 
-                        user.sendEmailVerification()
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.d("TAG", "Email sent.");
-                                        }
-                                    }
-                                });
+                            if (user != null) {
+                                user.sendEmailVerification()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d("TAG", "Email sent.");
+                                                }
+                                            }
+                                        });
+                            }
 
-                        dialog.dismiss();
-
-                        alertbox();
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
                             dialog.dismiss();
-                            Toast.makeText(SignupActivity.this, "Sign-up Failed. Please try again!",
-                                    Toast.LENGTH_SHORT).show();
+
+                            alertbox();
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                dialog.dismiss();
+                                Toast.makeText(SignupActivity.this, "Sign-up Failed. Please try again!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } else {
+                            Log.w("TAG", "signInWithEmail:failure", task.getException());
+                            dialog.dismiss();
+                            alertbox1(task.getException().getMessage());
                         }
-
-
-                    }
-
-                    private void alertbox() {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-                        builder.setTitle("One step remaining...")
-                                .setMessage("Please verify your Email Id and then Login.")
-                                .setCancelable(false)
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        Intent intent = new Intent(SignupActivity.this, IntroScreen.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                });
-                        AlertDialog alert = builder.create();
-                        alert.show();
                     }
                 });
+    }
+
+    private void alertbox() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+        builder.setTitle("One step remaining...")
+                .setMessage("Please verify your Email Id and then Login.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(SignupActivity.this, IntroScreen.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+    private void alertbox1(String result) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+        builder.setTitle("Uh.. Oh!")
+                .setMessage(result)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

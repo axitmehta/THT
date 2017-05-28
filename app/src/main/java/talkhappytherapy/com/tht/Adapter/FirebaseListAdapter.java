@@ -11,9 +11,14 @@ package talkhappytherapy.com.tht.Adapter;
         import com.firebase.client.DataSnapshot;
         import com.firebase.client.FirebaseError;
         import com.firebase.client.Query;
+        import com.firebase.client.ValueEventListener;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
 
         import java.util.ArrayList;
         import java.util.List;
+
+        import static talkhappytherapy.com.tht.R.id.author;
 
 /**
  * Created by Ashu on 20/11/15.
@@ -30,17 +35,24 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
 
 
 
-    public FirebaseListAdapter(Query mRef, Class<T> mModelClass, int mLayout, Activity activity) {
+    public FirebaseListAdapter(final Query mRef, final Class<T> mModelClass, final int mLayout, final Activity activity) {
+
+
+
         this.mRef = mRef;
         this.mModelClass = mModelClass;
         this.mLayout = mLayout;
         mInflater = activity.getLayoutInflater();
         mModels = new ArrayList<T>();
         mKeys = new ArrayList<String>();
+
         // Look for all child events. We will then map them to our own internal ArrayList, which backs ListView
         mListener = this.mRef.addChildEventListener(new ChildEventListener() {
+
+
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+
 
                 T model = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
                 String key = dataSnapshot.getKey();
@@ -86,6 +98,7 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
                 mKeys.remove(index);
                 mModels.remove(index);
 
+                System.out.println("Hello");
                 notifyDataSetChanged();
             }
 
@@ -122,6 +135,7 @@ public abstract class FirebaseListAdapter<T> extends BaseAdapter {
 
         });
     }
+
 
     public void cleanup() {
         // We're being destroyed, let go of our mListener and forget about all of the mModels
