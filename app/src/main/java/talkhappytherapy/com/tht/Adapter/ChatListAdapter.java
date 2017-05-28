@@ -4,8 +4,10 @@ package talkhappytherapy.com.tht.Adapter;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
         import android.graphics.Color;
+        import android.net.Uri;
         import android.text.util.Linkify;
         import android.view.View;
+        import android.webkit.URLUtil;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.RelativeLayout;
@@ -14,9 +16,14 @@ package talkhappytherapy.com.tht.Adapter;
         import com.bumptech.glide.Glide;
         import com.firebase.client.Query;
 
+        import java.io.IOException;
         import java.io.InputStream;
+        import java.io.PrintStream;
         import java.net.HttpURLConnection;
         import java.net.URL;
+        import java.net.URLConnection;
+        import java.util.ArrayList;
+        import java.util.List;
 
         import talkhappytherapy.com.tht.Model.Chat;
         import talkhappytherapy.com.tht.R;
@@ -98,21 +105,61 @@ public class ChatListAdapter extends FirebaseListAdapter<Chat> {
         txt = ((TextView) view.findViewById(R.id.message));
         image_link = (ImageView)view.findViewById(R.id.imagelink);
         messagelay = (LinearLayout)view.findViewById(R.id.messagelay);
-        if(chat.getMessage().contains(".jpg")||chat.getMessage().contains(".png")||chat.getMessage().contains(".jpeg")||chat.getMessage().contains(".gif"))
-        {
-            image_link.setVisibility(View.VISIBLE);
-            txt.setVisibility(View.GONE);
-            Glide.with(activity)
-                    .load(chat.getMessage())
-                    .into(image_link);
 
-        }
-        else {
+        try {
+            if (URLUtil.isValidUrl(chat.getMessage()) && chat.getMessage().contains("jpg") || chat.getMessage().contains("png") || chat.getMessage().contains("jpeg") || chat.getMessage().contains("gif")) {
+                image_link.setVisibility(View.VISIBLE);
+                txt.setVisibility(View.GONE);
+                Glide.with(activity)
+                        .load(chat.getMessage())
+                        .into(image_link);
 
-            txt.setVisibility(View.VISIBLE);
-            image_link.setVisibility(View.GONE);
-            txt.setText(chat.getMessage());
-            Linkify.addLinks(txt, Linkify.ALL);
+            } else {
+
+                txt.setVisibility(View.VISIBLE);
+                image_link.setVisibility(View.GONE);
+
+                if(containsAKeyword(chat.getMessage()))
+                {
+                    authorText.setTextColor(Color.RED);
+                    authorText.setText("Admin+ : ");
+                    txt.setText("*Moderated by Admin*, Please refrain from using offensive language!");
+                }
+                else
+                {
+                    if (author != null && author.equals(mUsername)) {
+                        authorText.setTextColor(Color.YELLOW);
+                    }
+                    else {
+                        if (author != null) {
+                            if (author.equalsIgnoreCase("admin") || author.equalsIgnoreCase("talk happy therapy")){
+                                authorText.setTextColor(Color.RED);
+                            }
+                            else {
+                                authorText.setTextColor(Color.GREEN);
+                            }
+                        }
+                    }
+                    txt.setText(chat.getMessage());
+                    Linkify.addLinks(txt, Linkify.ALL);
+                }
+            }
         }
+        catch (Exception ignored)
+        {}
+    }
+
+
+
+    private String[] keywords = {"fuck", "chutiya", "ass", "dick", "motherf", "cunt", "suck", "pussy", "fart", "cock", "arse", "faggot", "bitch"};
+
+
+    private boolean containsAKeyword(String myString){
+        for(String keyword : keywords){
+            if(myString.toLowerCase().contains(keyword)){
+                return true;
+            }
+        }
+        return false; // Never found match.
     }
 }
