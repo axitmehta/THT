@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (emailid.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+                if (emailid.getText().toString().isEmpty() && password.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Fields cannot be Empty", Toast.LENGTH_LONG).show();
                 } else {
                     login_func(emailid.getText().toString(), password.getText().toString());
@@ -224,15 +224,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d("TAG", "Email sent.");
-                            Toast.makeText(LoginActivity.this, "Check you Email... Reset your password with the link provided in there.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Check you Email...", Toast.LENGTH_SHORT).show();
                         } else
-                            Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
 
                     }
                 });
     }
 
-    public static boolean isValidEmail(CharSequence target) {
+    public final static boolean isValidEmail(CharSequence target) {
         if (target == null) {
             return false;
         } else {
