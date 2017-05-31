@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
+    useLibrary  'org.apache.http.legacy'
     defaultConfig {
         applicationId "talkhappytherapy.com.tht"
         minSdkVersion 16
@@ -15,10 +16,12 @@ android {
         }
         packagingOptions {
             exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/DEPENDENCIES.txt'
             exclude 'META-INF/NOTICE'
             exclude 'META-INF/LICENSE'
             exclude 'META-INF/LICENSE.txt'
             exclude 'META-INF/NOTICE.txt'
+            exclude 'LGPL2.1'
             exclude 'META-INF/LICENSE-FIREBASE.txt'
             exclude 'META-INF/LICENSE-FIREBASE_jvm.txt'
         }
@@ -37,12 +40,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile group: 'cz.msebera.android' , name: 'httpclient', version: '4.4.1.1'
+
     //dependencies
     
 
-    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.google.firebase:firebase-auth:10.2.1'
@@ -76,9 +81,5 @@ dependencies {
     compile 'com.github.lzyzsd.randomcolor:library:1.0.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'
 }
-
-
-
-
 
 apply plugin: 'com.google.gms.google-services'

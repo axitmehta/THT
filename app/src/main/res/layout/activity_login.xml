@@ -65,7 +65,8 @@
 
                     app:met_textColor="@android:color/white"
                     app:met_textColorHint="@android:color/white"
-                    app:met_underlineColor="@android:color/white" />
+                    app:met_underlineColor="@android:color/white"
+                    android:cursorVisible="false"/>
 
                 <com.rengwuxian.materialedittext.MaterialEditText
                     android:layout_width="match_parent"
@@ -82,7 +83,8 @@
                     app:met_primaryColor="@android:color/white"
                     app:met_singleLineEllipsis="true"
                     android:inputType="textPassword"
-                    android:id="@+id/login_EditTextPassword"/>
+                    android:id="@+id/login_EditTextPassword"
+                    android:cursorVisible="false"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

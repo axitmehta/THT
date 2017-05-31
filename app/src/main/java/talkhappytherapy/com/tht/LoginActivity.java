@@ -232,12 +232,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
-        if (target == null) {
-            return false;
-        } else {
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-        }
+    public static boolean isValidEmail(CharSequence target)
+    {
+        return (target!=null && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
     protected void sendEmail() {

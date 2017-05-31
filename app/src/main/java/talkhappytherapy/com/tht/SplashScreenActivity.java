@@ -75,7 +75,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         final Thread timerThread = new Thread() {
             public void run() {
 
-                handler.postDelayed(runnable, 2000);
+                handler.postDelayed(runnable, 3000);
             }
         };
         timerThread.start();
@@ -104,13 +104,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             if (signedin) {
                 startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             } else {
                 Intent intent = new Intent(SplashScreenActivity.this, IntroScreen.class);
                 intent.putExtra("firstTimeLogin", false);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             }
+            overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             finish();
         }
     };
